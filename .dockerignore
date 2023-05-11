@@ -1,0 +1,8 @@
+/node_modules
+
+README.md
+.env
+*.test.js
+
+.vscode
+.idea
