@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-portfolio-app
+spec:
+  selector:
+    matchLabels:
+      app: node-portfolio-app
+  
+  template:
+    metadata:
+      labels:
+        app: node-portfolio-app
+    
+    spec:
+      containers:
+      - name: node-portfolio-app
+  
+        image: <Image>
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
