@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+
+  build-and-push:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    - name: Docker Login
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag debasishbsws/debasishbsws-portfolio:$(git rev-parse --short "$GITHUB_SHA")
+
+    - name: Push it to DockerHub
+      run: docker push debasishbsws/debasishbsws-portfolio:$(git rev-parse --short "$GITHUB_SHA")
