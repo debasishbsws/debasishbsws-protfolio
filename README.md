@@ -3,4 +3,4 @@
 
 ## Description
 
-This is my portfolio. It will contains my resume, projects, and contact information.
+This is my portfolio. It will contains my resume, projects, and contact information and Social links
