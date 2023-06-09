@@ -19,7 +19,10 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag debasishbsws/debasishbsws-portfolio:$(git rev-parse --short "$GITHUB_SHA")
+      run: docker build . --file Dockerfile --tag debasishbsws/debasishbsws-portfolio:$(git rev-parse --short "$GITHUB_SHA") --tag debasishbsws/debasishbsws-portfolio:latest
 
-    - name: Push it to DockerHub
+    - name: Push specific tag image to DockerHub
       run: docker push debasishbsws/debasishbsws-portfolio:$(git rev-parse --short "$GITHUB_SHA")
+    - name: Push the latest tag Docker image to DockerHub
+      run: docker push debasishbsws/debasishbsws-portfolio:latest
+
