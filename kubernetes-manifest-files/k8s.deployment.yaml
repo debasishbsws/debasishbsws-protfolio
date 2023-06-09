@@ -3,10 +3,10 @@ kind: Deployment
 metadata:
   name: node-portfolio-app
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: node-portfolio-app
-  
   template:
     metadata:
       labels:
@@ -16,7 +16,7 @@ spec:
       containers:
       - name: node-portfolio-app
   
-        image: <Image>
+        image: debasishbsws/debasishbsws-portfolio:latest
         resources:
           limits:
             memory: "128Mi"
