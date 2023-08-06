@@ -1,0 +1,11 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: portfolio
+spec:
+  template:
+    spec:
+      containers:
+        - image: dockerhub.io/debasishbsws/debasish-portfolio
+          ports:
+            - containerPort: 3000
