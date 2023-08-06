@@ -24,7 +24,7 @@ jobs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ secrets.G_TOKEN }}
         
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag debasishbsws/debasishbsws-portfolio:$(git rev-parse --short "$GITHUB_SHA") --tag debasishbsws/debasishbsws-portfolio:latest
@@ -37,24 +37,23 @@ jobs:
   update-manifest:
     runs-on: ubuntu-latest
     needs: build-and-push
-
     steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
       with:
         repository: debasishbsws/debasishbsws-portfolio
         ref: master
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.G_TOKEN }}
       
-      - name: Update manifest
-        run: |
-          git config --global user.name "debasishbsws"
-          git config --global user.email "debasishbsws.abc@gmail.com"
-          echo "Current commit SHA: $GITHUB_SHA"
-          sed -i "s/debasishbsws-portfolio:.*\"/debasishbsws-portfolio:$(git rev-parse --short "$GITHUB_SHA") \"/" ops/knative-serving.yaml
-          git add ops/knative-serving.yaml
-          git commit -am "Update manifest with $GITHUB_SHA"
+    - name: Update manifest
+      run: |
+        git config --global user.name "debasishbsws"
+        git config --global user.email "debasishbsws.abc@gmail.com"
+        echo "Current commit SHA: $GITHUB_SHA"
+        sed -i "s/debasishbsws-portfolio:.*\"/debasishbsws-portfolio:$(git rev-parse --short "$GITHUB_SHA") \"/" ops/knative-serving.yaml
+        git add ops/knative-serving.yaml
+        git commit -am "Update manifest with $GITHUB_SHA"
 
-      - run: echo "Current commit SHA: $GITHUB_SHA"
-      - run: git push origin master
+    - run: echo "Current commit SHA: $GITHUB_SHA"
+    - run: git push origin master
           
 
