@@ -49,7 +49,7 @@ jobs:
         git config --global user.email "debasishbsws.abc@gmail.com"
         echo echo ${{ github.sha }}
         sed -i "s|image: dockerhub.io/debasishbsws/debasish-portfolio:.*\"|image: dockerhub.io/debasishbsws/debasish-portfolio:$(git rev-parse --short "$GITHUB_SHA")\"|" ops/knative-serving.yaml
-        git add ops/knative-serving.yaml
+        git add -A
         git commit -am "Update manifest with $GITHUB_SHA"
 
     - run: echo ${{ github }}
