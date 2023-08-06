@@ -6,6 +6,6 @@ spec:
   template:
     spec:
       containers:
-        - image: debasishbsws/debasishbsws-portfolio:8d627e8
+        - image: debasishbsws/debasishbsws-portfolio:9ae3132
           ports:
             - containerPort: 3000
