@@ -44,9 +44,10 @@ jobs:
         token: ${{ secrets.G_TOKEN }}
       
     - name: Update manifest
+      if: ${{ github.actor != 'update-manifest-bot' }}
       run: |
-        git config --global user.name "debasishbsws"
-        git config --global user.email "debasishbsws.abc@gmail.com"
+        git config --global user.name "update-manifest-bot"
+        git config --global user.email "bot.debasishbsws@gmail.com"
         echo echo ${{ github.sha }}
         sed -i "s#${{ github.actor }}.*#${{ github.actor }}/debasishbsws-portfolio:$(git rev-parse --short "$GITHUB_SHA")#g" ops/knative-serving.yaml
         git add -A
