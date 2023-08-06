@@ -27,11 +27,14 @@ jobs:
         password: ${{ secrets.G_TOKEN }}
         
     - name: Build the Docker image
+      if: ${{ github.actor != 'update-manifest-bot' }}
       run: docker build . --file Dockerfile --tag debasishbsws/debasishbsws-portfolio:$(git rev-parse --short "$GITHUB_SHA") --tag debasishbsws/debasishbsws-portfolio:latest
 
     - name: Push specific tag image to DockerHub
+      if: ${{ github.actor != 'update-manifest-bot' }}
       run: docker push debasishbsws/debasishbsws-portfolio:$(git rev-parse --short "$GITHUB_SHA")
     - name: Push the latest tag Docker image to DockerHub
+      if: ${{ github.actor != 'update-manifest-bot' }}
       run: docker push debasishbsws/debasishbsws-portfolio:latest
 
   update-manifest:
