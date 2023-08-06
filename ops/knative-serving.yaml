@@ -6,6 +6,6 @@ spec:
   template:
     spec:
       containers:
-        - image: dockerhub.io/debasishbsws/debasish-portfolio
+        - image: debasishbsws/debasish-portfolio
           ports:
             - containerPort: 3000
