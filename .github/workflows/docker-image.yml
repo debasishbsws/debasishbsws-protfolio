@@ -48,12 +48,12 @@ jobs:
       run: |
         git config --global user.name "debasishbsws"
         git config --global user.email "debasishbsws.abc@gmail.com"
-        echo "Current commit SHA: $GITHUB_SHA"
-        sed -i "s/debasishbsws-portfolio:.*\"/debasishbsws-portfolio:$(git rev-parse --short "$GITHUB_SHA") \"/" ops/knative-serving.yaml
+        echo echo ${{ github.sha }}
+        sed -i "s|image: dockerhub.io/debasishbsws/debasish-portfolio:.*\"|image: dockerhub.io/debasishbsws/debasish-portfolio:$(git rev-parse --short "$GITHUB_SHA")\"|" ops/knative-serving.yaml
         git add ops/knative-serving.yaml
         git commit -am "Update manifest with $GITHUB_SHA"
 
-    - run: echo "Current commit SHA: $GITHUB_SHA"
+    - run: echo ${{ github }}
     - run: git push origin master
           
 
